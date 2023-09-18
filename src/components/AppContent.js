@@ -1,0 +1,18 @@
+import React from 'react';
+import { useSelector } from 'react-redux';
+import TodoItem from './TodoItem';
+
+function AppContent() {
+  const todoList = useSelector((state) => state.todo.todoList);
+  const todoListSorted = [...todoList];
+  todoListSorted.sort((a, b) => new Date(b.time) - new Date(a.time));
+  return (
+    <div>
+      {todoListSorted && todoListSorted.length > 0
+        ? todoListSorted.map((todo) => <TodoItem key={todo.id} todo={todo} />)
+        : 'no todo found'}
+    </div>
+  );
+}
+
+export default AppContent;
